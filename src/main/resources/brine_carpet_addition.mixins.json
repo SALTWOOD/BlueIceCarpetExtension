@@ -4,7 +4,9 @@
   "package": "top.saltwood.brine_carpet_addition.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MixinAnvilScreenHandler"
+    "MixinAnvilScreenHandler",
+    "MixinPlayerSkullBlock",
+    "MixinSkullBlockEntity"
   ],
   "injectors": {
     "defaultRequire": 1
