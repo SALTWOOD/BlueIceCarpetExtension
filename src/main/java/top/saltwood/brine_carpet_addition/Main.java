@@ -19,6 +19,7 @@ public class Main implements ModInitializer, CarpetExtension {
 
     @Override
     public void onInitialize() {
+        CarpetServer.manageExtension(this);
     }
 
     @Override
@@ -48,6 +49,8 @@ public class Main implements ModInitializer, CarpetExtension {
         BcaProtocol.init();
         Main.SERVER = server;
     }
+
+
 
     public static Identifier id(String id) {
         return Identifier.of(MOD_ID, id);
