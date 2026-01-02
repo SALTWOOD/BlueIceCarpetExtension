@@ -29,7 +29,11 @@ public class Main implements ModInitializer, CarpetExtension {
             if (currentRuleState.categories().contains("BCA")) {
                 switch (currentRuleState.name()) {
                     case "bcaProtocolEnabled":
-                        // TODO
+                        if (currentRuleState.value() instanceof Boolean){
+                            if ((Boolean) currentRuleState.value()) BcaProtocol.enableBcaProtocolGlobal();
+                            else BcaProtocol.disableBcaProtocolGlobal();
+                        }
+                        break;
                     case "deathskull":
                         // TODO
                     default:
