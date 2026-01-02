@@ -4,6 +4,7 @@
   "package": "top.saltwood.brine_carpet_addition.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MixinAnvilScreenHandler"
   ],
   "injectors": {
     "defaultRequire": 1
