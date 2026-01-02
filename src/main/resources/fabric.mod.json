@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "brine_carpet_addition",
+  "version": "${version}",
+  "name": "BrineCarpetAddition",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "top.saltwood.brine_carpet_addition.client.MainClient"
+    ],
+    "main": [
+      "top.saltwood.brine_carpet_addition.Main"
+    ]
+  },
+  "mixins": [
+    "brine_carpet_addition.mixins.json",
+    {
+      "config": "brine_carpet_addition.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
