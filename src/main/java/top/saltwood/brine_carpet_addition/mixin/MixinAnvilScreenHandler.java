@@ -10,10 +10,19 @@ import top.saltwood.brine_carpet_addition.BcaSettings;
 public class MixinAnvilScreenHandler {
     @ModifyConstant(
             method = "updateResult",
+            constant = @Constant(intValue = 40, ordinal = 0),
+            require = 1
+    )
+    private int mixinMultipleEnchantment(int i) {
+        return BcaSettings.avoidAnvilTooExpensive ? Integer.MAX_VALUE : i;
+    }
+
+    @ModifyConstant(
+            method = "updateResult",
             constant = @Constant(intValue = 40, ordinal = 2),
             require = 1
     )
     private int mixinLimitInt(int i) {
-        return BcaSettings.avoidAnvilTooExpensive ? Integer.MAX_VALUE : 40;
+        return BcaSettings.avoidAnvilTooExpensive ? Integer.MAX_VALUE : i;
     }
 }
