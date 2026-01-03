@@ -36,7 +36,7 @@ public class DeathHandle {
         SimpleInventory inventory = new SimpleInventory(41);
 
         // items without vanishing curse will be added to inventory.
-        for(int i = 0; i < items.size(); ++i) {
+        for (int i = 0; i < items.size(); ++i) {
             ItemStack itemStack = items.getStack(i);
             if (!itemStack.isEmpty() && !EnchantmentHelper.hasAnyEnchantmentsWith(itemStack, EnchantmentEffectComponentTypes.PREVENT_EQUIPMENT_DROP)) {
                 inventory.addStack(itemStack);

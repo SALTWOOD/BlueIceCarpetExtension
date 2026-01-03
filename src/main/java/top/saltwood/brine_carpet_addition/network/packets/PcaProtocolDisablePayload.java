@@ -4,7 +4,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
-import top.saltwood.brine_carpet_addition.Main;
 import top.saltwood.brine_carpet_addition.network.PcaProtocol;
 
 public record PcaProtocolDisablePayload() implements CustomPayload {

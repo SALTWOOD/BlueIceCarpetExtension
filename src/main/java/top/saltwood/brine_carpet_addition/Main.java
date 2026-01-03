@@ -2,11 +2,9 @@ package top.saltwood.brine_carpet_addition;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.api.settings.SettingsManager;
 import carpet.utils.Translations;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -25,6 +23,10 @@ public class Main implements ModInitializer, CarpetExtension {
     @Nullable
     public static MinecraftServer SERVER = null;
 
+    public static Identifier id(String id) {
+        return Identifier.of(MOD_ID, id);
+    }
+
     @Override
     public void onInitialize() {
         CarpetServer.manageExtension(this);
@@ -39,7 +41,6 @@ public class Main implements ModInitializer, CarpetExtension {
             return true;
         });
     }
-
 
     @Override
     public void onGameStarted() {
@@ -69,9 +70,5 @@ public class Main implements ModInitializer, CarpetExtension {
     @Override
     public Map<String, String> canHasTranslations(String lang) {
         return Translations.getTranslationFromResourcePath("assets/" + MOD_ID + "/lang/%s.json".formatted(lang));
-    }
-
-    public static Identifier id(String id) {
-        return Identifier.of(MOD_ID, id);
     }
 }

@@ -11,14 +11,14 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
-import top.saltwood.brine_carpet_addition.Main;
+import top.saltwood.brine_carpet_addition.network.PcaProtocol;
 
 public record UpdateBlockEntityPayload(
         Identifier identifier,
         BlockPos pos,
         NbtCompound nbt
 ) implements CustomPayload {
-    public static final Identifier PACKET_ID = Main.id("update_entity");
+    public static final Identifier PACKET_ID = PcaProtocol.id("update_block_entity");
     public static final Id<UpdateBlockEntityPayload> ID = new Id<>(PACKET_ID);
     public static final PacketCodec<PacketByteBuf, UpdateBlockEntityPayload> CODEC =
             PacketCodec.tuple(
@@ -28,15 +28,15 @@ public record UpdateBlockEntityPayload(
                     UpdateBlockEntityPayload::new
             );
 
-    @Override
-    public Id<? extends CustomPayload> getId() {
-        return ID;
-    }
-
     public static UpdateBlockEntityPayload of(@NotNull ServerPlayerEntity player, @NotNull BlockEntity entity, RegistryWrapper.WrapperLookup lookup) {
         Identifier identifier = player.getWorld().getRegistryKey().getValue();
         BlockPos pos = entity.getPos();
         NbtCompound nbt = entity.createNbt(lookup);
         return new UpdateBlockEntityPayload(identifier, pos, nbt);
+    }
+
+    @Override
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }
