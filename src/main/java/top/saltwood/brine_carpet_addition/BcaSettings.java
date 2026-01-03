@@ -25,8 +25,7 @@ public class BcaSettings {
     @Rule(categories = {BCA, RuleCategory.FEATURE})
     public static boolean emeraldAttractsVillager = false;
 
-    // optimization
-    @Rule(categories = {BCA, RuleCategory.OPTIMIZATION})
+    @Rule(categories = {BCA, RuleCategory.FEATURE})
     public static boolean daydream = false;
 
     public enum BCA_SYNC_PLAYER_ENTITY_OPTIONS {
