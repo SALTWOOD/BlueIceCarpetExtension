@@ -12,8 +12,8 @@
 </div>
 
 > [!NOTE]
-> 我做这款模组是因为 [MasaGadget](https://github.com/plusls/MasaGadget) 中「同步实体数据」的功能所依赖的 [PluslsCarpetAddition](https://github.com/plusls/plusls-carpet-addition) 暂未更新至 1.21.1 版本，并且我需要它的墓碑功能。
-> PluslsCarpetAddition 使用用 CC0 协议，意味着作者放弃了代码的相关著作权。
+> 我做这款模组是因为 [MasaGadget](https://github.com/plusls/MasaGadget) 中「同步实体数据」的功能所依赖的 [PluslsCarpetAddition](https://github.com/plusls/plusls-carpet-addition) 未更新至 1.21.1 版本，并且我需要它的墓碑功能。
+> PluslsCarpetAddition 使用 CC0 协议，意味着作者放弃了代码的相关著作权。
 > 因此我在阅读源码后，基于其原有逻辑与部分代码，移植并实现了其中的部分功能。
 
 > [!TIP]
@@ -27,11 +27,11 @@
   启用 PCA 的实体/方块同步协议（兼容模式）。
 - **玩家实体同步权限配置 (`syncPlayer`)**
   搭配同步协议使用，可自定义允许同步的玩家实体范围，可选配置：
-  ✔ `NOBODY` - 不同步任何玩家实体
-  ✔ `BOT` - 仅同步机器人玩家实体
-  ✔ `OPS` - 仅同步管理员与机器人玩家实体
-  ✔ `OPS_AND_SELF` - 同步管理员、机器人与自身玩家实体
-  ✔ `EVERYONE` - 同步所有玩家实体
+- **`NOBODY`** - 不同步任何玩家实体
+- **`BOT`** - 仅同步假人玩家实体
+- **`OPS`** - 仅同步管理员与假人玩家实体
+- **`OPS_AND_SELF`** - 同步管理员、假人与自身玩家实体
+- **`EVERYONE`** - 同步所有玩家实体
 
 ### 功能
 - **解除铁砧等级上限 (`avoidAnvilTooExpensive`)**
