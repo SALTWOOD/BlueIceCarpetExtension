@@ -1,9 +1,9 @@
 {
   "carpet.category.BCA": "BCA",
   "carpet.category.protocol": "Protocol",
-  "carpet.rule.bcaProtocolEnabled.name": "BCA Sync Protocol",
-  "carpet.rule.bcaProtocolEnabled.desc": "Synchronizes Entities and BlockEntities to the client",
-  "carpet.rule.syncPlayer.name": "BCA Sync Protocol - Player Data Sync",
+  "carpet.rule.pcaProtocolEnabled.name": "PCA Sync Protocol (Compatible)",
+  "carpet.rule.pcaProtocolEnabled.desc": "Synchronizes Entities and BlockEntities to the client",
+  "carpet.rule.syncPlayer.name": "Player Data Sync",
   "carpet.rule.syncPlayer.desc": "Determines which player's data can be synchronized",
   "carpet.rule.syncPlayer.extra.0": "NOBODY: No player data can be synchronized",
   "carpet.rule.syncPlayer.extra.1": "BOT: Data of summoned bots can be synchronized",

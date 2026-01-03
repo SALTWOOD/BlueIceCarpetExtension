@@ -9,7 +9,7 @@ public class BcaSettings {
 
     // protocol
     @Rule(categories = {BCA, PROTOCOL})
-    public static boolean bcaProtocolEnabled = false;
+    public static boolean pcaProtocolEnabled = false;
 
     @Rule(categories = {BCA, PROTOCOL})
     public static BCA_SYNC_PLAYER_ENTITY_OPTIONS syncPlayer = BCA_SYNC_PLAYER_ENTITY_OPTIONS.OPS;

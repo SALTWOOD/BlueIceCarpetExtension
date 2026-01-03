@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
-import top.saltwood.brine_carpet_addition.network.BcaProtocol;
+import top.saltwood.brine_carpet_addition.network.PcaProtocol;
 import top.saltwood.brine_carpet_addition.util.DeathHandle;
 
 import java.util.Map;
@@ -21,11 +21,6 @@ import java.util.Map;
 public class Main implements ModInitializer, CarpetExtension {
     public static final String MOD_ID = "brine_carpet_addition";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
-    public static final SettingsManager bcaSettingsManager = new SettingsManager(
-            FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString(),
-            MOD_ID,
-            "BCA Addition");
 
     @Nullable
     public static MinecraftServer SERVER = null;
@@ -50,14 +45,14 @@ public class Main implements ModInitializer, CarpetExtension {
     public void onGameStarted() {
         CarpetServer.settingsManager.parseSettingsClass(BcaSettings.class);
 
-        bcaSettingsManager.registerRuleObserver((serverCommandSource, currentRuleState, originalUserTest) -> {
+        CarpetServer.settingsManager.registerRuleObserver((serverCommandSource, currentRuleState, originalUserTest) -> {
             switch (currentRuleState.name()) {
-                case "bcaProtocolEnabled":
+                case "pcaProtocolEnabled":
                     if (currentRuleState.value() instanceof Boolean enabled) {
                         if (enabled) {
-                            BcaProtocol.enableBcaProtocolGlobal();
+                            PcaProtocol.enableBcaProtocolGlobal();
                         } else {
-                            BcaProtocol.disableBcaProtocolGlobal();
+                            PcaProtocol.disableBcaProtocolGlobal();
                         }
                     }
                     break;
@@ -66,13 +61,8 @@ public class Main implements ModInitializer, CarpetExtension {
     }
 
     @Override
-    public SettingsManager extensionSettingsManager() {
-        return bcaSettingsManager;
-    }
-
-    @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
-        BcaProtocol.init();
+        PcaProtocol.init();
         Main.SERVER = server;
     }
 

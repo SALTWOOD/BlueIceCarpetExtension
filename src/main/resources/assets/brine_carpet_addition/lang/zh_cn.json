@@ -1,8 +1,8 @@
 {
   "carpet.category.BCA": "BCA",
   "carpet.category.protocol": "协议",
-  "carpet.rule.bcaProtocolEnabled.name": "BCA 同步协议",
-  "carpet.rule.bcaProtocolEnabled.desc": "用于同步 Entity 和 BlockEntity 到客户端",
+  "carpet.rule.pcaProtocolEnabled.name": "PCA 同步协议（兼容）",
+  "carpet.rule.pcaProtocolEnabled.desc": "用于同步 Entity 和 BlockEntity 到客户端",
   "carpet.rule.syncPlayer.name": "同步玩家数据",
   "carpet.rule.syncPlayer.desc": "决定哪些玩家的数据将会被同步",
   "carpet.rule.syncPlayer.extra.0": "NOBODY：所有玩家数据都无法同步",
