@@ -43,10 +43,10 @@ jobs:
           name: brine_carpet_addition-release
           path: build/libs/${{ env.JAR_NAME }}
 
-      - name: Upload Artifact (Always)
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.JAR_NAME }}
+          name: build.jar
           path: build/libs/${{ env.JAR_NAME }}
 
       - name: Create Release
