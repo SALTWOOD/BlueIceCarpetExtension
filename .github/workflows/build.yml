@@ -1,0 +1,61 @@
+name: Build and Release Fabric Mod
+
+on:
+  push:
+    branches: [ "master" ]
+    tags: [ "v*" ] # 检测到 v1.0.0 这种格式的 tag 时触发发布
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 发布 Release 需要写入权限
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Read metadata
+        id: metadata
+        run: |
+          MOD_VER=$(grep "mod_version" gradle.properties | cut -d'=' -f2 | xargs)
+          MC_VER=$(grep "minecraft_version" gradle.properties | cut -d'=' -f2 | xargs)
+          echo "MOD_VERSION=$MOD_VER" >> $GITHUB_ENV
+          echo "MC_VERSION=$MC_VER" >> $GITHUB_ENV
+          echo "JAR_NAME=brine_carpet_addition-v${MOD_VER}-mc${MC_VER}.jar" >> $GITHUB_ENV
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Rename Build Artifact
+        run: |
+          RAW_JAR=$(ls build/libs/ | grep ".jar" | grep -v "-dev" | grep -v "-sources" | head -n 1)
+          mv build/libs/$RAW_JAR build/libs/${{ env.JAR_NAME }}
+
+      - name: Upload Artifact (Always)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.JAR_NAME }}
+          path: build/libs/${{ env.JAR_NAME }}
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/${{ env.JAR_NAME }}
+          name: Release ${{ env.MOD_VERSION }} (MC ${{ env.MC_VERSION }})
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
