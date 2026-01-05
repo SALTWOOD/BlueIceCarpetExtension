@@ -32,7 +32,7 @@ jobs:
           MC_VER=$(grep "minecraft_version" gradle.properties | cut -d'=' -f2 | xargs)
           echo "MOD_VERSION=$MOD_VER" >> $GITHUB_ENV
           echo "MC_VERSION=$MC_VER" >> $GITHUB_ENV
-          echo "JAR_NAME=brine_carpet_addition-mc${MC_VER}-v${MOD_VER}.jar" >> $GITHUB_ENV
+          echo "JAR_NAME=blue_ice_carpet_extension-mc${MC_VER}-v${MOD_VER}.jar" >> $GITHUB_ENV
 
       - name: Build with Gradle
         run: ./gradlew build
