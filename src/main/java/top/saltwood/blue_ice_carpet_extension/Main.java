@@ -30,6 +30,7 @@ public class Main implements ModInitializer, CarpetExtension {
     public static final String MOD_ID = "blue_ice_carpet_extension";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final String VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+    public static final UpdateChecker CHECKER = new UpdateChecker(VERSION, LOGGER);
 
     @Nullable
     public static MinecraftServer SERVER = null;
@@ -72,6 +73,11 @@ public class Main implements ModInitializer, CarpetExtension {
                         }
                     }
                     break;
+                case "biceUpdateCheck":
+                    if (currentRuleState.value() instanceof Boolean enabled) {
+                        if (enabled) CHECKER.check();
+                    }
+                    break;
             }
         });
 
@@ -80,8 +86,8 @@ public class Main implements ModInitializer, CarpetExtension {
         PcaProtocol.init();
         registerPlayerDeathEvent();
         UseEntityCallback.EVENT.register(ViewInventoryHandler::useOnPlayer);
-        UpdateChecker checker = new UpdateChecker(VERSION, LOGGER);
-        if (ModSettings.biceUpdateCheck) checker.check();
+
+        if (ModSettings.biceUpdateCheck) CHECKER.check();
         ServerPlayerEvents.JOIN.register(UpdateChecker::registerTip);
     }
 
