@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "top.saltwood.blue_ice_carpet_extension.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinAnvilScreenHandler",
     "MixinPlayerSkullBlock",
