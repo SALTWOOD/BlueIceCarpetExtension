@@ -14,7 +14,8 @@
 
 > [!NOTE]
 > 我做这款模组是因为 [MasaGadget](https://github.com/plusls/MasaGadget)
-> 中「同步实体数据」的功能所依赖的 [PluslsCarpetAddition](https://github.com/plusls/plusls-carpet-addition) 未更新至 1.21.1
+> 中「同步实体数据」的功能所依赖的 [PluslsCarpetAddition](https://github.com/plusls/plusls-carpet-addition) 未更新至
+> 1.21.1
 > 版本，并且我需要它的墓碑功能。
 > PluslsCarpetAddition 使用 CC0 协议，意味着作者放弃了代码的相关著作权。
 > 因此我在阅读源码后，基于其原有逻辑与部分代码，移植并实现了其中的部分功能。

@@ -22,20 +22,53 @@ import java.util.UUID;
 
 public class UpdateChecker {
     private static final String API_URL = "https://api.github.com/repos/SALTWOOD/BlueIceCarpetExtension/releases/latest";
-
-    private final Logger logger;
-    private final String currentVersion;
-    private final HttpClient httpClient;
-
+    private static final List<UUID> notifiedPlayers = new ArrayList<>();
     private static boolean hasUpdate = false;
     private static String latestVersionTag = "";
     private static String downloadUrl = "";
-    private static final List<UUID> notifiedPlayers = new ArrayList<>();
+    private final Logger logger;
+    private final String currentVersion;
+    private final HttpClient httpClient;
 
     public UpdateChecker(String currentVersion, Logger logger) {
         this.currentVersion = currentVersion;
         this.httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
         this.logger = logger;
+    }
+
+    public static void registerTip(ServerPlayerEntity player) {
+        if (!ModSettings.biceUpdateCheck) return;
+        if (!hasUpdate) return;
+        if (!player.hasPermissionLevel(2)) return;
+        if (notifiedPlayers.contains(player.getUuid())) return;
+
+        player.sendMessage(Text.literal("[BlueIceCarpetExtension] ").formatted(Formatting.AQUA)
+                .append(Text.literal("A new version ").formatted(Formatting.WHITE))
+                .append(Text.literal(latestVersionTag).formatted(Formatting.GREEN))
+                .append(Text.literal(" is available ").formatted(Formatting.WHITE))
+                .append(Text.literal("here!").formatted(Formatting.UNDERLINE)
+                        .styled(style -> style
+                                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, downloadUrl))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Open GitHub Releases")))
+                        )
+                )
+        );
+
+        player.sendMessage(Text.literal("This message is shown only once per operator per server startup.")
+                .formatted(Formatting.GRAY).formatted(Formatting.ITALIC)
+        );
+
+        player.sendMessage(Text.literal("You can disable this check via: ").formatted(Formatting.GRAY)
+                .append(Text.literal("/carpet setDefault biceUpdateCheck false").formatted(Formatting.GOLD))
+                .styled(style -> style
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/carpet setDefault biceUpdateCheck false"))
+                        .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Click to fill this command!")))
+                )
+        );
+
+        player.sendMessage(Text.literal("Thank you for using my mod!").formatted(Formatting.LIGHT_PURPLE));
+
+        notifiedPlayers.add(player.getUuid());
     }
 
     public void check() {
@@ -76,40 +109,5 @@ public class UpdateChecker {
             logger.error("Network request failed while running update checker: {}", ex.getMessage());
             return null;
         });
-    }
-
-    public static void registerTip(ServerPlayerEntity player) {
-        if (!ModSettings.biceUpdateCheck) return;
-        if (!hasUpdate) return;
-        if (!player.hasPermissionLevel(2)) return;
-        if (notifiedPlayers.contains(player.getUuid())) return;
-
-        player.sendMessage(Text.literal("[BlueIceCarpetExtension] ").formatted(Formatting.AQUA)
-                .append(Text.literal("A new version ").formatted(Formatting.WHITE))
-                .append(Text.literal(latestVersionTag).formatted(Formatting.GREEN))
-                .append(Text.literal(" is available ").formatted(Formatting.WHITE))
-                .append(Text.literal("here!").formatted(Formatting.UNDERLINE)
-                        .styled(style -> style
-                                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, downloadUrl))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Open GitHub Releases")))
-                        )
-                )
-        );
-
-        player.sendMessage(Text.literal("This message is shown only once per operator per server startup.")
-                .formatted(Formatting.GRAY).formatted(Formatting.ITALIC)
-        );
-
-        player.sendMessage(Text.literal("You can disable this check via: ").formatted(Formatting.GRAY)
-                .append(Text.literal("/carpet setDefault biceUpdateCheck false").formatted(Formatting.GOLD))
-                .styled(style -> style
-                        .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/carpet setDefault biceUpdateCheck false"))
-                        .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Click to fill this command!")))
-                )
-        );
-
-        player.sendMessage(Text.literal("Thank you for using my mod!").formatted(Formatting.LIGHT_PURPLE));
-
-        notifiedPlayers.add(player.getUuid());
     }
 }

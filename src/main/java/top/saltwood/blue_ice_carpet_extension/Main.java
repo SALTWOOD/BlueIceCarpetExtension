@@ -85,9 +85,9 @@ public class Main implements ModInitializer, CarpetExtension {
 
         PcaProtocol.init();
         registerPlayerDeathEvent();
-        UseEntityCallback.EVENT.register(ViewInventoryHandler::useOnPlayer);
-
         if (ModSettings.biceUpdateCheck) CHECKER.check();
+
+        UseEntityCallback.EVENT.register(ViewInventoryHandler::useOnPlayer);
         ServerPlayerEvents.JOIN.register(UpdateChecker::registerTip);
     }
 

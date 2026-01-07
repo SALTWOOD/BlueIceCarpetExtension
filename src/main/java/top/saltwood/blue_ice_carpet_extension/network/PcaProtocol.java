@@ -26,8 +26,8 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.saltwood.blue_ice_carpet_extension.ModSettings;
 import top.saltwood.blue_ice_carpet_extension.Main;
+import top.saltwood.blue_ice_carpet_extension.ModSettings;
 import top.saltwood.blue_ice_carpet_extension.network.packets.*;
 
 import java.util.HashMap;
