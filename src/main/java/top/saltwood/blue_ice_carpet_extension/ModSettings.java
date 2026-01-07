@@ -30,9 +30,6 @@ public class ModSettings {
     @Rule(categories = {MOD, RuleCategory.FEATURE})
     public static PLAYER_SELECTOR viewPlayerInv = PLAYER_SELECTOR.NOBODY;
 
-    @Rule(categories = {MOD})
-    public static boolean biceUpdateCheck = true;
-
     public enum PLAYER_SELECTOR {
         NOBODY, BOT, OPS, OPS_AND_SELF, EVERYONE
     }
