@@ -5,27 +5,34 @@ import net.minecraft.block.entity.SkullBlockEntity;
 import net.minecraft.component.EnchantmentEffectComponentTypes;
 import net.minecraft.component.type.ProfileComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.UUID;
 
 public class DeathHandle {
     public static void handle(@NotNull ServerPlayerEntity player) {
         World world = player.getWorld();
         PlayerInventory items = player.getInventory();
-        if (items.isEmpty()) return;
 
-        if (world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
+        if (items.isEmpty()
+                || world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
             return;
         }
 
@@ -42,22 +49,41 @@ public class DeathHandle {
                 inventory.addStack(itemStack);
             }
         }
+
         int experience = player.totalExperience / 2;
+
+        LocalDateTime now = LocalDateTime.now();
+        long timestamp = now.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        String formattedTime = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
 
         items.clear();
         player.experienceLevel = 0;
         player.playerScreenHandler.sendContentUpdates();
 
-        // place the skull down
         BlockPos skullPos = DeathSkullChecker.findSkullPos(player);
         world.setBlockState(skullPos, Blocks.PLAYER_HEAD.getDefaultState(), 3);
         SkullBlockEntity skullEntity = (SkullBlockEntity) world.getBlockEntity(skullPos);
-        if (skullEntity != null) {
-            ProfileComponent playerProfileComponent = new ProfileComponent(player.getGameProfile());
-            skullEntity.setOwner(playerProfileComponent);
-        }
-        DeathSkullInterface death = ((DeathSkullInterface) Objects.requireNonNull(skullEntity));
-        death.deathInfo$set(new DeathInfo(new Date().getTime(), experience, inventory));
+
+        Objects.requireNonNull(skullEntity);
+
+        ProfileComponent playerProfileComponent = new ProfileComponent(player.getGameProfile());
+        skullEntity.setOwner(playerProfileComponent);
+
+        DisplayEntity.TextDisplayEntity display = new DisplayEntity.TextDisplayEntity(EntityType.TEXT_DISPLAY, world);
+        display.setBillboardMode(DisplayEntity.BillboardMode.CENTER);
+        display.setText(player.getName().copy()
+                .append(Text.literal("\n" + formattedTime))
+        );
+        display.setViewRange(0.125f); // Visible to nearby players
+        display.setPosition(new Vec3d(skullPos.getX() + 0.5, skullPos.getY() + 1.2, skullPos.getZ() + 0.5));
+
+        UUID displayUuid = display.getUuid();
+
+        DeathSkullInterface death = ((DeathSkullInterface) skullEntity);
+        death.deathInfo$set(new DeathInfo(timestamp, experience, inventory, displayUuid));
+
+        world.spawnEntity(display);
+
         skullEntity.markDirty();
     }
 }
