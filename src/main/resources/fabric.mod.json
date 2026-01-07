@@ -7,7 +7,7 @@
   "icon": "assets/blue_ice_carpet_extension/icon.png",
   "authors": [],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "environment": "*",
   "entrypoints": {
     "client": [
