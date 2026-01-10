@@ -9,8 +9,6 @@ import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -21,8 +19,6 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import top.saltwood.blue_ice_carpet_extension.command.ViewCommand;
 import top.saltwood.blue_ice_carpet_extension.network.PcaProtocol;
-import top.saltwood.blue_ice_carpet_extension.recipe.FireworkExtensionRecipe;
-import top.saltwood.blue_ice_carpet_extension.recipe.ShulkerBoxRecolorRecipe;
 import top.saltwood.blue_ice_carpet_extension.util.DeathHandle;
 import top.saltwood.blue_ice_carpet_extension.util.ViewInventoryHandler;
 
@@ -42,9 +38,6 @@ public class Main implements ModInitializer, CarpetExtension {
     @Override
     public void onInitialize() {
         CarpetServer.manageExtension(this);
-
-        Registry.register(Registries.RECIPE_SERIALIZER, Main.id("firework_extension"), FireworkExtensionRecipe.SERIALIZER);
-        Registry.register(Registries.RECIPE_SERIALIZER, Main.id("shulker_box_recolor"), ShulkerBoxRecolorRecipe.SERIALIZER);
     }
 
     @Override
