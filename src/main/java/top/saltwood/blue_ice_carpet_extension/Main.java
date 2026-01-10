@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import top.saltwood.blue_ice_carpet_extension.command.ViewCommand;
 import top.saltwood.blue_ice_carpet_extension.network.PcaProtocol;
+import top.saltwood.blue_ice_carpet_extension.recipe.FireworkExtensionRecipe;
 import top.saltwood.blue_ice_carpet_extension.util.DeathHandle;
 import top.saltwood.blue_ice_carpet_extension.util.ViewInventoryHandler;
 
@@ -38,6 +39,8 @@ public class Main implements ModInitializer, CarpetExtension {
     @Override
     public void onInitialize() {
         CarpetServer.manageExtension(this);
+
+        FireworkExtensionRecipe.register();
     }
 
     @Override

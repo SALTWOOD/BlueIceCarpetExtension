@@ -24,5 +24,7 @@
   "carpet.rule.viewPlayerInv.extra.1": "BOT：所有玩家都可以右键可以查看召唤出的 bot 的背包",
   "carpet.rule.viewPlayerInv.extra.2": "OPS：权限等级为 2 或更高的玩家可以右键查看任意玩家的背包",
   "carpet.rule.viewPlayerInv.extra.3": "OPS_AND_SELF：同上（你怎么右键自己的？）",
-  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE：所有人都可以右键查看任意玩家的背包"
+  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE：所有人都可以右键查看任意玩家的背包",
+  "carpet.rule.fireworkExtensionRecipe.name": "烟花火箭时长延长",
+  "carpet.rule.fireworkExtensionRecipe.desc": "通过将烟花火箭与火药合成以延长飞行时间。每增加一个火药时长加 1，最高可达 255。"
 }

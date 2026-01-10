@@ -24,5 +24,7 @@
   "carpet.rule.viewPlayerInv.extra.1": "BOT: All players can right-click to view the inventory of summoned bots",
   "carpet.rule.viewPlayerInv.extra.2": "OPS: Players with permission level 2 or higher can right-click to view any player's inventory",
   "carpet.rule.viewPlayerInv.extra.3": "OPS_AND_SELF: Same as \"OPS\" (Wait, how did you do that???)",
-  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE: All players can right-click to view any player's inventory"
+  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE: All players can right-click to view any player's inventory",
+  "carpet.rule.fireworkExtensionRecipe.name": "Firework Rocket Duration Extension",
+  "carpet.rule.fireworkExtensionRecipe.desc": "Extend the flight duration of a firework rocket by crafting it with gunpowder. Each gunpowder added increases the duration by 1, with a maximum limit of 255."
 }
