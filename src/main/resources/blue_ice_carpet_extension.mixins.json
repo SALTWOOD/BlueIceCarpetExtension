@@ -8,7 +8,8 @@
     "MixinPlayerSkullBlock",
     "MixinServerWorld",
     "MixinSkullBlockEntity",
-    "MixinVillagerEntity"
+    "MixinVillagerEntity",
+    "MixinItemEntity"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -30,6 +30,9 @@ public class ModSettings {
     @Rule(categories = {MOD, RuleCategory.FEATURE})
     public static PLAYER_SELECTOR viewPlayerInv = PLAYER_SELECTOR.NOBODY;
 
+    @Rule(categories = {MOD, RuleCategory.FEATURE, RuleCategory.SURVIVAL, RuleCategory.OPTIMIZATION})
+    public static int itemDespawnAge = 0;
+
     public enum PLAYER_SELECTOR {
         NOBODY, BOT, OPS, OPS_AND_SELF, EVERYONE
     }

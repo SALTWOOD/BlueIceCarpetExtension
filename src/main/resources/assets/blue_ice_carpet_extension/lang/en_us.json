@@ -17,5 +17,6 @@
   "carpet.rule.viewPlayerInv.extra.1": "BOT: Allows viewing the inventory of Carpet bots.",
   "carpet.rule.viewPlayerInv.extra.2": "OPS: Permission level 2+ can view any player's inventory.",
   "carpet.rule.viewPlayerInv.extra.3": "OPS_AND_SELF: Operators can view anyone; regular players can view bots or themselves.",
-  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE: Anyone can view any player's inventory."
+  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE: Anyone can view any player's inventory.",
+  "carpet.rule.itemDespawnAge.desc": "Sets the time in ticks until a dropped item entity despawns. Set to 0 to use vanilla (6000), or -1 for items to never despawn."
 }

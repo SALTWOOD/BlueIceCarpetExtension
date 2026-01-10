@@ -24,5 +24,7 @@
   "carpet.rule.viewPlayerInv.extra.1": "BOT：允许查看假人的物品栏。",
   "carpet.rule.viewPlayerInv.extra.2": "OPS：仅限管理员（2级及以上）查看他人物品栏。",
   "carpet.rule.viewPlayerInv.extra.3": "OPS_AND_SELF：管理员可查看所有人，普通玩家可查看假人或自己（如果你能点到的话）。",
-  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE：允许任何人查看任何人的物品栏。"
+  "carpet.rule.viewPlayerInv.extra.4": "EVERYONE：允许任何人查看任何人的物品栏。",
+  "carpet.rule.itemDespawnAge.name": "物品消失时间",
+  "carpet.rule.itemDespawnAge.desc": "设置掉落物在地面上存在多久后消失（单位：刻）。设定为 0 表示使用原版逻辑，设定为 -1 表示永不消失。"
 }
