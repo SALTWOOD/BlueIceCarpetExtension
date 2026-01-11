@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -45,8 +46,8 @@ public class DeathHandle {
         // items without vanishing curse will be added to inventory.
         for (int i = 0; i < items.size(); ++i) {
             ItemStack itemStack = items.getStack(i);
-            if (!itemStack.isEmpty() && !EnchantmentHelper.hasAnyEnchantmentsWith(itemStack, EnchantmentEffectComponentTypes.PREVENT_EQUIPMENT_DROP)) {
-                inventory.addStack(itemStack);
+            if (!EnchantmentHelper.hasAnyEnchantmentsWith(itemStack, EnchantmentEffectComponentTypes.PREVENT_EQUIPMENT_DROP)) {
+                inventory.setStack(i, itemStack);
             }
         }
 
@@ -85,5 +86,30 @@ public class DeathHandle {
         world.spawnEntity(display);
 
         skullEntity.markDirty();
+    }
+
+    public static void restore(@NotNull ServerPlayerEntity player, @NotNull DeathInfo info) {
+        PlayerInventory playerInventory = player.getInventory();
+        SimpleInventory deathInventory = info.inventory();
+
+        for (int i = 0; i < deathInventory.size(); ++i) {
+            ItemStack stack = deathInventory.getStack(i);
+            if (stack.isEmpty()) continue;
+
+            ItemStack copy = stack.copy();
+            ItemStack currentOccupant = playerInventory.getStack(i);
+
+            if (currentOccupant.isEmpty()) playerInventory.setStack(i, copy);
+            else if (!playerInventory.insertStack(copy)) {
+                // Find an available slot if target slot is used
+                // Drop if full
+                player.dropItem(copy, false);
+            }
+        }
+
+        // Experiences
+        player.addExperience(info.exp());
+
+        player.sendMessage(Text.literal("Restored your inventory!").formatted(Formatting.GREEN), true);
     }
 }

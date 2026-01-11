@@ -5,11 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinAnvilScreenHandler",
+    "MixinItemEntity",
     "MixinPlayerSkullBlock",
     "MixinServerWorld",
     "MixinSkullBlockEntity",
-    "MixinVillagerEntity",
-    "MixinItemEntity"
+    "MixinVillagerEntity"
   ],
   "injectors": {
     "defaultRequire": 1
